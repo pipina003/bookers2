@@ -1,0 +1,38 @@
+<div class="container">
+ <div class="row">
+
+  <div class="col-lg-4">
+   <h1>Userinfo</h1>
+<!--ユーザー詳細、新規投稿-->
+    <%= render 'books/books', user: @user, book: @book %>
+  </div>
+
+<!--投稿一覧-->
+<!--全員のユーザー情報一覧を表示したい-->
+<div class="col-lg-8">
+ <h1>Books</h1>
+  <table class="table table-striped">
+  <thead>
+   <tr>
+     <th>image</th>
+     <th>name</th>
+     <th colspan="3"></th>
+   </tr>
+  </thead>
+
+   <tbody>
+    <tr>
+    <% @users.each do |user| %>
+<!--ユーザー画像-->
+     <td><%= image_tag user.get_profile_image(100,100) %></td>
+     <td><%= user.name %></td>
+
+     <td><%= link_to "show", user_path(@user.id)  %></td>
+    </tr>
+   </tbody>
+   <% end %>
+  </table>
+
+  </div>
+ </div>
+</div>

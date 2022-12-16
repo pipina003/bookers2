@@ -1,0 +1,44 @@
+<!--サクセスメッセージ-->
+<div>
+  <%= flash[:notice] %>
+</div>
+
+
+<div class="container">
+ <div class="row">
+
+  <div class="col-lg-4">
+   <h1>Userinfo</h1>
+<!-- ユーザーの詳細 -->
+     <%= render 'books/books', user: @user, book: @book %>
+  </div>
+
+<!--投稿一覧-->
+<!--現在ログインしているユーザーの投稿のみ表示したい-->
+  <div class="col-lg-8">
+    <h1>Books</h1>
+      <table class="table table-striped">
+       <thead>
+        <tr>
+         <th>Title</th>
+          <th>Body</th>
+          <th colspan="3"></th>
+        </tr>
+       </thead>
+
+      <tbody>
+       <tr>
+       <% @books.each do |book| %>
+      <!--ユーザー画像-->
+       <td><%= image_tag book.user.get_profile_image(100,100) %></td>
+
+       <td class="head-title"><%= link_to book.title, "/books/#{book.id}" %></td>
+       <td><%= book.body %></td>
+      </tr>
+     </tbody>
+      <% end %>
+     </table>
+
+   </div>
+  </div>
+ </div>

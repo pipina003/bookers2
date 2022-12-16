@@ -1,0 +1,43 @@
+
+<!--User info-->
+ <p><%= image_tag user.get_profile_image(100,100) %></p>
+  <table class="table table-striped">
+   <tr>
+     <th>name <%= user.name %></th>
+   </tr>
+   <tr>
+     <th>introduction <%= user.introduction %></th>
+   </tr>
+</table>
+
+<% if user.id == current_user.id %>
+　<%= link_to edit_user_path(current_user.id) do %>
+  <div class= " edit btn btn-outline-secondary btn-default btn-block" >
+    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+  </div>
+　<% end %>
+<% end %>
+
+<!--投稿フォーム-->
+<!--バリデーション-->
+<h1>New Book</h1>
+<% if book.errors.any? %>
+  <%= book.errors.count %>件のエラーが発生しました
+  <ul>
+    <% book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<!-- form_with部分 -->
+<%= form_with model: book do |f| %>
+
+  <h4>Title</h4>
+  <%= f.text_field:title %>
+
+  <h4>Opinion</h4>
+  <%= f.text_area:body %><br />
+
+  <%= f.submit 'Create Book' %>
+<% end %>
